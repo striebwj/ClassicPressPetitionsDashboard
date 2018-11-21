@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin Name:       ClassicPress Requests
+ * Plugin Name:       ClassicPress Petitions Dashboard Widget
  * Plugin URI:        https://omukiguy.com
- * Description:       Get requested topics for ClassicPress
+ * Description:       Find the latest petitions for ClassicPress growth.
  * Version:			  1.0.0
  * Author:            Laurence Bahiirwa
  * Author URI:        https://omukiguy.com
