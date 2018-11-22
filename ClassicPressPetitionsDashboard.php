@@ -67,10 +67,21 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		public function cp_petitions_dashboard_widget_cb() {
 
 			/**
-			 * Query API for JSON data -> decode results to php.
+			 * Query API for JSON data -> decode results to php 
+			 * 
+			 * @return array
 			 */
-			$string = file_get_contents( $this->api_url );
-			$json = json_decode( $string, true );
+			$response = wp_remote_get( $this->api_url );
+
+			if ( ! is_array( $response ) ) {
+				return;
+			}
+
+			if ( is_array( $response ) ) {
+				$body = $response['body']; // use the content
+			}
+
+			$json = json_decode( $body, true );
 			
 			echo '<ul class="cp_petitions">';
 
@@ -98,14 +109,14 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 			echo '<div class="sub">
 					<a href="' . esc_url( $this->petitions_url ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts! Make your Petition', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
 				</div>';
-			
 		}
-
+		
+		/**
+		 * Enqueue all our scripts
+		 */
 		public function cp_dashboard_scripts_enqueue() {
-			// enqueue all our scripts
 			wp_enqueue_style( 'cp_requests' , plugin_dir_url( __FILE__ ) . 'assets/css/plugin.css' );
 		}
-
 
 		/**
 		 * Remove WordPress events.
