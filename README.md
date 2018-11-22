@@ -20,5 +20,13 @@ Find the latest petitions for ClassicPress growth.
 
 ## Changelog
 
+### Version 1.0.0 (22.11.2018)
+* Used right API for most wanted features
+* Class Self tests
+* New variables to keep class code clean
+* Limited the returned values to 10 only.
+* Internationalization added.
+* Styles the widget with default stylings in core
+
 ### Version 1.0.0 (21.11.2018)
 * Initial Commit

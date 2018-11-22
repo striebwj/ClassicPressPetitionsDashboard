@@ -1,0 +1,46 @@
+#cp_petitions_dashboard_widget,
+#cp_petitions_dashboard_widget {
+  .postbox {
+    .inside {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .sub {
+    color: #555d66;
+    background: #f5f5f5;
+    padding: 10px 12px 6px;
+  }
+}
+
+/* Petitions list */
+.cp_petitions {
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 12px 10px;
+  }
+  table {
+    width: 100%;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    border-spacing: 0;
+  }
+
+  li:nth-child(even) {
+    color: #555d66;
+    background: #f5f5f5;
+  }
+  .votes-count {
+    padding: 1px 3px;
+    border-radius: 100%;
+    background: #0073aa;
+    color: white;
+  }
+}
+
+/* Link to the petitions website  */
+.cp_petitions_link {
+  margin: 1rem 0;
+}
