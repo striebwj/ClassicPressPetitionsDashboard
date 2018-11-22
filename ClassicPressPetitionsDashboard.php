@@ -14,7 +14,6 @@
  * Domain Path:       /languages
  */
 
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // End if().
@@ -45,6 +44,7 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 
 			add_action( 'wp_dashboard_setup', array( $this, 'cp_add_dashboard_widgets' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'cp_dashboard_scripts_enqueue' ) );
+			add_action( 'wp_dashboard_setup', array( $this, 'remove_wordpress_events' ) );
 
 		}
 
@@ -105,11 +105,24 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 			// enqueue all our scripts
 			wp_enqueue_style( 'cp_requests' , plugin_dir_url( __FILE__ ) . 'assets/css/plugin.css' );
 		}
+
+
+		/**
+		 * Remove WordPress events.
+		 */
+		public function remove_wordpress_events() {
+			global $wp_meta_boxes;
+			if ( ! isset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'] ) ) {
+				return;
+			}
+			if ( ! is_array( $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'] ) ) {
+				return;
+			}
+			remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+		}
+
 	}
-	
-	/**
-	 * Run the Class.
-	 */
+
 	$run = new ClassicPressPetitionsDashboard;
 	return $run->cp_start_plugin();
 }
