@@ -63,6 +63,13 @@ class ClassicPressPetitionsDashboard {
 	 * Remove WordPress events.
 	 */
 	public function remove_wordpress_events() {
+		global $wp_meta_boxes;
+		if ( ! isset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'] ) ) {
+			return;
+		}
+		if ( ! is_array( $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'] ) ) {
+			return;
+		}
 		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 	}
 
