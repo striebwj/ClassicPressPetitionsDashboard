@@ -42,8 +42,10 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		 * Initialize the class when called.
 		 */
 		public function cp_start_plugin() {
+
 			add_action( 'wp_dashboard_setup', array( $this, 'cp_add_dashboard_widgets' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'cp_dashboard_scripts_enqueue' ) );
+
 		}
 
 		/**
@@ -63,29 +65,33 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		 * Callback function to output the contents of our Dashboard Widget.
 		 */
 		public function cp_petitions_dashboard_widget_cb() {
+
+			/**
+			 * Query API for JSON data -> decode results to php.
+			 */
 			$string = file_get_contents( $this->api_url );
-			$json = json_decode($string, true);
+			$json = json_decode( $string, true );
 			
 			echo '<ul class="cp_petitions">';
 
-			$i = 0;
-			foreach( $json as $key => $value ) { 
-				//Limit the shown petitions to 10 only
-				if ( $i++ > 10 ) break;
-			?>
-					<li>
-						<a target="_blank"
-							href="<?php echo esc_url( $this->petitions_url . '/posts/' . $value['number'] . '/' . $value['slug'] ) . '">' . esc_attr__( $value['title'], $this->text_domain ) . ' ' . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>' . ' ' . esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['user']['name'] ) ); ?>
-						<table>
-							<tr>
-								<td><strong>Up Votes:</strong> <span class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?><span></td>
-								<td><strong>Status:</strong> <?php echo esc_attr_e( ucfirst( $value['status'] ), $this->text_domain ); ?></td>
-								<td><strong>Created:</strong> <?php echo date('d-M-Y',strtotime( $value['createdAt'] ) ); ?> </td>
-							</tr>
-						</table>
-					</li>
-			<?php
-			}
+				$i = 0;
+				foreach( $json as $key => $value ) { 
+					//Limit the shown petitions to 10 only
+					if ( $i++ > 10 ) break;
+				?>
+						<li>
+							<a target="_blank"
+								href="<?php echo esc_url( $this->petitions_url . '/posts/' . $value['number'] . '/' . $value['slug'] ) . '">' . esc_attr__( $value['title'], $this->text_domain ) . ' ' . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>' . ' ' . esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['user']['name'] ) ); ?>
+							<table>
+								<tr>
+									<td><strong>Up Votes:</strong> <span class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?><span></td>
+									<td><strong>Status:</strong> <?php echo esc_attr_e( ucfirst( $value['status'] ), $this->text_domain ); ?></td>
+									<td><strong>Created:</strong> <?php echo date('d-M-Y',strtotime( $value['createdAt'] ) ); ?> </td>
+								</tr>
+							</table>
+						</li>
+				<?php
+				}
 			
 			echo '</ul>';
 
