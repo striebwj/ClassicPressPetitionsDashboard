@@ -11,9 +11,8 @@ Find the latest petitions for ClassicPress growth.
 
 ## Installation
 1. Upload the plugin to the `/wp-content/plugins/` directory or from the repository.
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Refer to plugin description in regards to setting up how the plugins works
-1. **It will work out of the box**. Move to your media library and you can unattach and re-attach attachments to various posts.
+1. Activate the plugin through the 'Plugins' menu in ClassicPress
+1. **Plugin will work out of the box**.
 
 ## Frequently Asked Questions
 1. How can I contribute?
