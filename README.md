@@ -9,7 +9,7 @@
 Find the latest petitions for ClassicPress growth.
 
 ## Installation
-1. Upload the plugin to the `/wp-content/plugins/` directory or [install directly] from the repository.
+1. Upload the plugin to the `/wp-content/plugins/` directory or install directly from the repository.
 1. Activate the plugin through the 'Plugins' menu in ClassicPress
 
 ## Frequently Asked Questions
