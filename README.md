@@ -1,6 +1,6 @@
 # ClassicPress Petitions Dashboard Widget
 * Requires at least: 4.9.8
-* Tested up to: 4.9.9
+* Tested up to: 4.9.8
 * Stable tag: 1.0.3
 
 ## Description
