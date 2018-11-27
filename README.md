@@ -21,6 +21,10 @@ Find the latest petitions for ClassicPress growth.
 
 ## Changelog
 
+### Version 1.0.3 (27.11.2018)
+* Proper Version Numbers
+* Added Screenshots.
+
 ### Version 1.0.2 (22.11.2018)
 * Conditionally remove events dashboard widget
 * use `wp_remote_get()` instead of `file_get_contents()` to get API response. Ref #3
