@@ -1,15 +1,18 @@
 # ClassicPress Petitions Dashboard Widget
-* Requires at least: 4.9.0
-* Tested up to: 4.9.0
-* Stable tag: 1.0.0
-
+* Requires at least: 4.9.8
+* Tested up to: 4.9.9
+* Stable tag: 1.0.3
 
 ## Description
-
 Find the latest petitions for ClassicPress growth.
 
+## Screeshots
+![Screen shot of Top 10 ClassicPress Petitions in Dashboard](https://github.com/bahiirwa/ClassicPressPetitionsDashboard/assets/images/Screenshot-1.png "Screen shot of Top 10 ClassicPress Petitions in Dashboard")
+
+![Screen shot of Action button on Top 10 ClassicPress Petitions in Dashboard](https://github.com/bahiirwa/ClassicPressPetitionsDashboard/assets/images/Screenshot-2.png "Screen shot of Action button on Top 10 ClassicPress Petitions in Dashboard")
+
 ## Installation
-1. Upload the plugin to the `/wp-content/plugins/` directory or install directly from the repository.
+1. Upload the plugin to the `/wp-content/plugins/` directory ~~or install directly from the repository~~.
 1. Activate the plugin through the 'Plugins' menu in ClassicPress
 
 ## Frequently Asked Questions
