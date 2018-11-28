@@ -28,10 +28,10 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		public $api_url;
 		public $petitions_url;
 		public $text_domain;
-		
+
 		public function __construct() {
 
-			$this->api_url = 'https://classicpress.fider.io/api/v1/posts?view=most-wanted';
+			$this->api_url = 'https://api-v1.classicpress.net/features/1.0/';
 			$this->petitions_url = 'https://petitions.classicpress.net';
 			$this->text_domain = 'cp_requests';
 
@@ -52,23 +52,23 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		 * Add a widget to the dashboard.
 		 */
 		public function cp_add_dashboard_widgets() {
-		
+
 			wp_add_dashboard_widget(
 				'cp_petitions_dashboard_widget', // Widget slug.
 				esc_attr__( 'ClassicPress Petitions', $this->text_domain ), // Title.
 				array( $this, 'cp_petitions_dashboard_widget_cb' ) // Display function.
-			);	
-				
+			);
+
 		}
-			
+
 		/**
 		 * Callback function to output the contents of our Dashboard Widget.
 		 */
 		public function cp_petitions_dashboard_widget_cb() {
 
 			/**
-			 * Query API for JSON data -> decode results to php 
-			 * 
+			 * Query API for JSON data -> decode results to php
+			 *
 			 * @return array
 			 */
 			$response = wp_remote_get( $this->api_url );
@@ -82,35 +82,38 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 			}
 
 			$json = json_decode( $body, true );
-			
+			$most_wanted = $json['most-wanted']; // get most wanted (upvoted)
+
+			// TODO: Dropdown to see most wanted, trending, and recent
+
 			echo '<ul class="cp_petitions">';
 
 				$i = 0;
-				foreach( $json as $key => $value ) { 
+				foreach( $most_wanted['data'] as $key => $value ) {
 					//Limit the shown petitions to 10 only
 					if ( $i++ > 10 ) break;
 				?>
 						<li>
 							<a target="_blank"
-								href="<?php echo esc_url( $this->petitions_url . '/posts/' . $value['number'] . '/' . $value['slug'] ) . '">' . esc_attr__( $value['title'], $this->text_domain ) . ' ' . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>' . ' ' . esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['user']['name'] ) ); ?>
+								href="<?php echo esc_url( $value['link'] ) . '">' . esc_attr__( $value['title'], $this->text_domain ) . ' ' . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>' . ' ' . esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) ); ?>
 							<table>
 								<tr>
 									<td><strong>Up Votes:</strong> <span class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?><span></td>
 									<td><strong>Status:</strong> <?php echo esc_attr_e( ucfirst( $value['status'] ), $this->text_domain ); ?></td>
-									<td><strong>Created:</strong> <?php echo date('d-M-Y',strtotime( $value['createdAt'] ) ); ?> </td>
+									<td><strong>Created:</strong> <?php echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ago'; ?> </td>
 								</tr>
 							</table>
 						</li>
 				<?php
 				}
-			
+
 			echo '</ul>';
 
 			echo '<div class="sub">
-					<a href="' . esc_url( $this->petitions_url ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts! Make your Petition', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+					<a href="' . esc_url( $most_wanted['link'] ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts! Make your Petition', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
 				</div>';
 		}
-		
+
 		/**
 		 * Enqueue all our scripts
 		 */
