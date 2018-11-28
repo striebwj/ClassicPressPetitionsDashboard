@@ -96,9 +96,9 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 								href="<?php echo esc_url( $value['link'] ) . '">' . esc_attr__( $value['title'], $this->text_domain ) . ' ' . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>' . ' ' . esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) ); ?>
 							<table>
 								<tr>
-									<td><strong>Up Votes:</strong> <span class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?><span></td>
-									<td><strong>Status:</strong> <?php echo esc_attr_e( ucfirst( $value['status'] ), $this->text_domain ); ?></td>
-									<td><strong>Created:</strong> <?php echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ago'; ?> </td>
+									<td><strong>Up Votes:</strong> <span class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></span></td>
+									<td><strong><?php echo esc_attr__( 'Status:', $this->text_domain ); ?></strong> <?php echo esc_attr_e( ucfirst( $value['status'] ), $this->text_domain ); ?></td>
+									<td><strong><?php echo esc_attr__( 'Created:', $this->text_domain ); ?>:</strong> <?php echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ago'; ?> </td>
 								</tr>
 							</table>
 						</li>
