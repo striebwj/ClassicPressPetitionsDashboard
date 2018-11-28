@@ -26,13 +26,11 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		 * Repeated Variables
 		 */
 		public $api_url;
-		public $petitions_url;
 		public $text_domain;
 
 		public function __construct() {
 
 			$this->api_url = 'https://api-v1.classicpress.net/features/1.0/';
-			$this->petitions_url = 'https://petitions.classicpress.net';
 			$this->text_domain = 'cp_requests';
 
 		}
@@ -110,7 +108,7 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 			echo '</ul>';
 
 			echo '<div class="sub">
-					<a href="' . esc_url( $most_wanted['link'] ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts! Make your Petition', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+					<a href="' . esc_url( $json['link'] ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts! Make your Petition', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
 				</div>';
 		}
 
