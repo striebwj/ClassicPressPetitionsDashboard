@@ -26,13 +26,11 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 		 * Repeated Variables
 		 */
 		public $api_url;
-		public $petitions_url;
 		public $text_domain;
 
 		public function __construct() {
 
 			$this->api_url = 'https://api-v1.classicpress.net/features/1.0/';
-			$this->petitions_url = 'https://petitions.classicpress.net';
 			$this->text_domain = 'cp_requests';
 
 		}
@@ -82,43 +80,154 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 			}
 
 			$json = json_decode( $body, true );
+
 			$most_wanted = $json['most-wanted']; // get most wanted (upvoted)
+			$recent = $json['recent']; // get recent
+			$trending = $json['trending']; // get trending
 
 			// TODO: Dropdown to see most wanted, trending, and recent
-
-			echo '<ul class="cp_petitions">';
-
-				$i = 0;
-				foreach( $most_wanted['data'] as $key => $value ) {
-					//Limit the shown petitions to 10 only
-					if ( $i++ > 10 ) break;
-				?>
-						<li>
-							<a target="_blank"
-								href="<?php echo esc_url( $value['link'] ) . '">' . esc_attr__( $value['title'], $this->text_domain ) . ' ' . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>' . ' ' . esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) ); ?>
-							<table>
-								<tr>
-									<td><strong>Up Votes:</strong> <span class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?><span></td>
-									<td><strong>Status:</strong> <?php echo esc_attr_e( ucfirst( $value['status'] ), $this->text_domain ); ?></td>
-									<td><strong>Created:</strong> <?php echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ago'; ?> </td>
-								</tr>
-							</table>
-						</li>
-				<?php
-				}
-
-			echo '</ul>';
-
 			echo '<div class="sub">
-					<a href="' . esc_url( $most_wanted['link'] ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts! Make your Petition', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+					<a href="' . esc_url( $json['link'] ) . '" target="_blank" class="cp_petitions_link">' . esc_attr__( 'Your voice counts, create and vote on petitions.', $this->text_domain ) . '<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
 				</div>';
+
+			echo <<<EOL
+			<div class="tab">
+			  <button class="tablinks" onclick="showTable(event, 'Trending')">Trending</button>
+			  <button class="tablinks" onclick="showTable(event, 'Recent')">Recent</button>
+			  <button class="tablinks" onclick="showTable(event, 'Most-Wanted')">Most Wanted</button>
+			</div>
+
+
+			<div id="Trending" class="tabcontent">
+			<table width="100%" class="cp_petitions">
+				<col width="10%">
+				<col width="90%">
+				<tr>
+					<th>Votes</th>
+					<th>Petitions</th>
+				</tr>
+			</div>
+EOL;
+
+		foreach( $trending['data'] as $key => $value ) {
+		?>
+		<tr>
+			<th class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></th>
+
+			<th class="petition">
+				<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>">
+					<strong>
+						<?php echo esc_attr__( $value['title'], $this->text_domain )?>
+						<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span>
+						<span aria-hidden="true" class="dashicons dashicons-external"></span>
+					</strong>
+				</a>
+				<?php
+				esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
+
+				if($value['status'] == "open"){
+					echo esc_attr__( ' - ', $this->text_domain ) . ' '; echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
+				}else{
+					echo esc_attr_e( ' - ', $this->text_domain ) . esc_attr_e( ucfirst( $value['status'] ), $this->text_domain );
+				}
+				?>
+			</th>
+		</tr>
+		<?php
 		}
+
+		echo '</table></div>';
+
+		echo <<<EOL
+		<div id="Recent" class="tabcontent">
+		<table width="100%" class="cp_petitions">
+			<col width="10%">
+			<col width="90%">
+			<tr>
+				<th>Votes</th>
+				<th>Petitions</th>
+			</tr>
+		</div>
+EOL;
+
+foreach( $recent['data'] as $key => $value ) {
+?>
+<tr>
+	<th class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></th>
+
+	<th class="petition">
+		<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>">
+			<strong>
+				<?php echo esc_attr__( $value['title'], $this->text_domain )?>
+				<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span>
+				<span aria-hidden="true" class="dashicons dashicons-external"></span>
+			</strong>
+		</a>
+		<?php
+		esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
+
+		if($value['status'] == "open"){
+			echo esc_attr__( ' - ', $this->text_domain ) . ' '; echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
+		}else{
+			echo esc_attr_e( ' - ', $this->text_domain ) . esc_attr_e( ucfirst( $value['status'] ), $this->text_domain );
+		}
+		?>
+	</th>
+</tr>
+<?php
+}
+
+echo '</table></div>';
+
+echo <<<EOL
+		<div id="Most-Wanted" class="tabcontent">
+		<table width="100%" class="cp_petitions">
+			<col width="10%">
+			<col width="90%">
+			<tr>
+				<th>Votes</th>
+				<th>Petitions</th>
+			</tr>
+		</div>
+EOL;
+
+foreach( $most_wanted['data'] as $key => $value ) {
+?>
+<tr>
+	<th class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></th>
+
+	<th class="petition">
+		<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>">
+			<strong>
+				<?php echo esc_attr__( $value['title'], $this->text_domain )?>
+				<span class="screen-reader-text">' . esc_attr__( '(opens in a new window)', $this->text_domain ) . '</span>
+				<span aria-hidden="true" class="dashicons dashicons-external"></span>
+			</strong>
+		</a>
+		<?php
+		esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
+
+		if($value['status'] == "open"){
+			echo esc_attr__( ' - ', $this->text_domain ) . ' '; echo human_time_diff(  strtotime($value['createdAt']), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
+		}else{
+			echo esc_attr_e( ' - ', $this->text_domain ) . esc_attr_e( ucfirst( $value['status'] ), $this->text_domain );
+		}
+		?>
+	</th>
+</tr>
+<?php
+}
+
+echo '</table></div>';
+}
+
 
 		/**
 		 * Enqueue all our scripts
 		 */
 		public function cp_dashboard_scripts_enqueue() {
 			wp_enqueue_style( 'cp_requests' , plugin_dir_url( __FILE__ ) . 'assets/css/plugin.css' );
+			wp_enqueue_script( 'cp_tabs', plugin_dir_url( __FILE__ ) . 'assets/js/tabs.js');
 		}
 
 		/**
