@@ -13,5 +13,6 @@ function showTable(evt, type) {
 }
 
 window.addEventListener("load", function(){
-    showTable(event, 'trending');
+    var trending = document.getElementsByClassName('trending');
+    trending[0].click();
 });
