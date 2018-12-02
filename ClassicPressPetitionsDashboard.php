@@ -131,7 +131,7 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 				';
 
 				if ( $list_item == 'trending' ) {
-					foreach( $most_wanted['data'] as $key => $value ) {
+					foreach( $trending['data'] as $key => $value ) {
 						?>
 						<tr>
 							<td class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></td>
@@ -180,7 +180,7 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 				}
 
 				if ( $list_item == 'most-wanted' ) {
-					foreach( $trending['data'] as $key => $value ) {
+					foreach( $most_wanted['data'] as $key => $value ) {
 					?>
 						<tr>
 							<td class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></td>
