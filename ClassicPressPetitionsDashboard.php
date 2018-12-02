@@ -97,8 +97,10 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 			//Tab Navigation head
 			echo '<div class="tab">';
 
+			/** 
+			 * TODO: Get the first button to colorize like tab. Make tab navigation more obvious.
+			 */
 			$first = 0;
-
 			foreach ( $list as $list_item ) { 
 
 				if( $first++ == 0 ) {
@@ -122,8 +124,8 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 					<col width="90%">
 					<thead>
 						<tr>
-							<td>Votes</td>
-							<td>Petitions</td>
+							<td>' . esc_attr__( 'Votes', $this->text_domain ) . '</td>
+							<td>' . esc_attr__( 'Petitions', $this->text_domain ) . '</td>
 						</tr>
 					</thead>
 				';
@@ -135,15 +137,20 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 							<td class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></td>
 			
 							<td class="petition">
-								<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>"><strong><?php echo esc_attr__( $value['title'], $this->text_domain )?><span class="screen-reader-text"><?php echo esc_attr__( '(opens in a new window)', $this->text_domain ); ?></span><span aria-hidden="true" class="dashicons dashicons-external"></span></strong>
-									</a><?php
+								<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>"><strong><?php echo esc_attr__( $value['title'], $this->text_domain )?><span class="screen-reader-text"><?php echo esc_attr__( '(opens in a new window)', $this->text_domain ); ?></span><span aria-hidden="true" class="dashicons dashicons-external"></span></strong></a>
+								<?php
 									esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
 				
 									if ( $value['status'] == "open" ){
 										echo esc_attr__( ' - ', $this->text_domain ) . ' ' . human_time_diff( strtotime( $value['createdAt'] ), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
-									} else{
-										echo esc_attr_e( ' - ', $this->text_domain ) . esc_attr_e( ucfirst( $value['status'] ), $this->text_domain );
-									} ?>
+									} 
+									elseif ( $value['status'] == "planned" ){
+										echo ' - ' . '<span class="planned">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
+									} 
+									else{
+										echo ' - ' . '<span class="started">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
+									}
+									?>
 							</td>
 						</tr>
 					<?php

@@ -81,3 +81,17 @@ td {
 td:nth-child(1) {
   text-align: center;
 }
+
+span.planned {
+  display: inline;
+  background: #89288f; /* 61ce70 is the classic green but a pain to read */
+  color: #fff;
+  padding: 2px 4px;
+}
+
+span.started {
+  display: inline;
+  background: #1da21d;
+  color: #fff;
+  padding: 2px 4px;
+}
