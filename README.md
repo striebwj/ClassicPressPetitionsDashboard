@@ -23,7 +23,7 @@ Find the latest petitions for ClassicPress growth.
 
 ## Changelog
 
-### Version 0.1.3 (27.11.2018)
+### Version 0.1.3 (02.12.2018)
 * New Tab Navigation for petitions
 * Refactored Code 
 * Proper Versioning
