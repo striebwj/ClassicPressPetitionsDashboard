@@ -1,14 +1,13 @@
 # ClassicPress Petitions Dashboard Widget
-* Requires at least: 4.9.8
-* Tested up to: 4.9.8
-* Stable tag: 1.0.3
-
-## Description
-Find the latest petitions for ClassicPress growth.
+* ClassicPress is a community run software. Get a quick view the latest, trending and most requested petitions from the ClassicPress community in the dashboard.
 
 ## Installation
 1. Upload the plugin to the `/wp-content/plugins/` directory ~~or install directly from the repository~~.
 1. Activate the plugin through the 'Plugins' menu in ClassicPress
+
+## Requirements
+* Requires ClassicPress: 4.9.8
+* Tested up to: 4.9.8
 
 ## Screeshots
 ![Screen shot of Top 10 ClassicPress Petitions in Dashboard with tab navigation](https://github.com/bahiirwa/ClassicPressPetitionsDashboard/blob/master/assets/images/Screenshot-1.png "Screen shot of Top 10 ClassicPress Petitions in Dashboard with tab navigation")
@@ -26,6 +25,7 @@ Find the latest petitions for ClassicPress growth.
 ### Version 0.1.3 (02.12.2018)
 * New Tab Navigation for petitions
 * Refactored Code 
+* Color Code statuses
 * Proper Versioning
 
 ### Version 0.1.3 (27.11.2018)
