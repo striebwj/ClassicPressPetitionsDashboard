@@ -6,25 +6,19 @@
 
 #cp_petitions_dashboard_widget .sub,
 #cp_petitions_dashboard_widget .sub {
-  background: #e7e7e7;
+  background: #f5f5f5;
   padding: 10px 12px 6px;
 }
 
 /* Petitions list */
-.cp_petitions {
-  padding: 0;
-  margin: 0;
-}
-
-.cp_petitions table {
+table.cp_petitions {
   width: 100%;
   padding: 0;
-  margin: 0.5rem 0 0 0;
   border-spacing: 0;
 }
 
-tbody tr:nth-child(even){
-  background: #f5f5f5;
+tbody tr:nth-child(odd){
+  background: #fff;
 }
 
 .cp_petitions .votes-count {
@@ -43,12 +37,14 @@ tbody tr:nth-child(even){
 /* Style the tab */
 .tab {
     overflow: hidden;
-    background-color: #e7e7e7;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+
 }
 
 /* Style the buttons inside the tab */
 .tab button {
-    background-color: inherit;
+    background-color: #f5f5f5;
     float: left;
     border: none;
     outline: none;
@@ -59,16 +55,29 @@ tbody tr:nth-child(even){
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #e8e8e8;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #ccc;
+    background-color: #ddd;
 }
 
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding: 6px 0px;
+    background-color: #f5f5f5;
+}
+
+thead {
+  font-weight: 700;
+}
+
+td {
+  padding: 8px;
+}
+
+td:nth-child(1) {
+  text-align: center;
 }
