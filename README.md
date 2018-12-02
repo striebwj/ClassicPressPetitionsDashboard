@@ -19,6 +19,7 @@ Find the latest petitions for ClassicPress growth.
 
 ## TODO
 1. Get the first button to colorize like tab. Make tab navigation more obvious. (Line 101)
+1. Repetition for the data tables html. (Line 136-155, 163-174, 185-198)
 
 ## Changelog
 
