@@ -4,7 +4,7 @@
  * Plugin Name:       ClassicPress Petitions Dashboard Widget
  * Plugin URI:        https://omukiguy.com
  * Description:       Find the latest petitions for ClassicPress growth.
- * Version:			  1.0.3
+ * Version:			  0.1.4
  * Author:            Laurence Bahiirwa
  * Author URI:        https://omukiguy.com
  * Requires PHP:      5.6
