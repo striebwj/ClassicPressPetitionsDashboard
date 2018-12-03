@@ -1,5 +1,5 @@
 # ClassicPress Petitions Dashboard Widget
-* ClassicPress is a community run software. Get a quick view the latest, trending and most requested petitions from the ClassicPress community in the dashboard.
+ClassicPress is a community run software. Get a quick view the latest, trending and most requested petitions from the ClassicPress community in the dashboard.
 
 ## Installation
 1. Upload the plugin to the `/wp-content/plugins/` directory ~~or install directly from the repository~~.
