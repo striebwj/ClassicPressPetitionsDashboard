@@ -16,11 +16,11 @@ ClassicPress is a community run software. Get a quick view the latest, trending 
 1. How can I contribute?
 * You can raise lots of issues here and also make some Pull Requests.
 
-## TODO
-1. Get the first button to colorize like tab. Make tab navigation more obvious. (Line 101)
-1. Repetition for the data tables html. (Line 136-155, 163-174, 185-198)
-
 ## Changelog
+
+### Version 0.1.4 (03.12.2018)
+* Tab Navigation styling clean up
+* Static function introduced to remove html repetition
 
 ### Version 0.1.3 (02.12.2018)
 * New Tab Navigation for petitions
