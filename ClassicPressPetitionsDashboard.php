@@ -133,7 +133,7 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 						$text_domain = $this->text_domain;
 
 						ClassicPressPetitionsDashboard::table_body( $votesCount, $link, $title, $author, $status, $createdTime, $text_domain );
-						
+
 					}
 				}
 
@@ -217,7 +217,7 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 						else{
 							echo ' - ' . '<span class="started">' . esc_attr__( ucfirst( $status ), $text_domain ) . '</span>';
 						}
-						?>
+					?>
 				</td>
 			</tr>
 		<?php
