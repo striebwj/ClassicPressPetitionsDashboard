@@ -123,84 +123,49 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 
 				if ( $list_item == 'trending' ) {
 					foreach( $trending['data'] as $key => $value ) {
-						?>
-						<tr>
-							<td class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></td>
-			
-							<td class="petition">
-								<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>"><strong><?php echo esc_attr__( $value['title'], $this->text_domain )?><span class="screen-reader-text"><?php echo esc_attr__( '(opens in a new window)', $this->text_domain ); ?></span><span aria-hidden="true" class="dashicons dashicons-external"></span></strong></a>
-								<?php
-									esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
-				
-									if ( $value['status'] == "open" ){
-										echo esc_attr__( ' - ', $this->text_domain ) . ' ' . human_time_diff( strtotime( $value['createdAt'] ), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
-									} 
-									elseif ( $value['status'] == "planned" ){
-										echo ' - ' . '<span class="planned">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
-									} 
-									else{
-										echo ' - ' . '<span class="started">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
-									}
-									?>
-							</td>
-						</tr>
-					<?php
+
+						$votesCount = $value['votesCount'];
+						$link = $value['link'];
+						$title = $value['title'];
+						$author = $value['createdBy'];
+						$status = $value['status'];
+						$createdTime = $value['createdAt'];
+						$text_domain = $this->text_domain;
+
+						ClassicPressPetitionsDashboard::table_body( $votesCount, $link, $title, $author, $status, $createdTime, $text_domain );
+						
 					}
 				}
 
 				if ( $list_item == 'recent' ) {
 					foreach( $recent['data'] as $key => $value ) {
-						?>
-						<tr>
-							<td class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></td>
-			
-							<td class="petition">
-								<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>"><strong><?php echo esc_attr__( $value['title'], $this->text_domain )?><span class="screen-reader-text"><?php echo esc_attr__( '(opens in a new window)', $this->text_domain ); ?></span><span aria-hidden="true" class="dashicons dashicons-external"></span></strong></a>
-								<?php
-									esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
-				
-									if ( $value['status'] == "open" ){
-										echo esc_attr__( ' - ', $this->text_domain ) . ' ' . human_time_diff( strtotime( $value['createdAt'] ), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
-									}
-									elseif ( $value['status'] == "planned" ){
-										echo "planned";
-										echo ' - ' . '<span class="planned">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
-									}
-									else{
-										echo ' - ' . '<span class="started">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
-									}
-									?>
-							</td>
-						</tr>
-					<?php
+
+						$votesCount = $value['votesCount'];
+						$link = $value['link'];
+						$title = $value['title'];
+						$author = $value['createdBy'];
+						$status = $value['status'];
+						$createdTime = $value['createdAt'];
+						$text_domain = $this->text_domain;
+
+						ClassicPressPetitionsDashboard::table_body( $votesCount, $link, $title, $author, $status, $createdTime, $text_domain );
+
 					}
 				}
 
 				if ( $list_item == 'most-wanted' ) {
 					foreach( $most_wanted['data'] as $key => $value ) {
-					?>
-					<tr>
-						<td class="votes-count"><?php echo esc_attr( $value['votesCount'] ); ?></td>
 
-						<td class="petition">
-							<a target="_blank" href="<?php echo esc_url( $value['link'] ) ?>"><strong><?php echo esc_attr__( $value['title'], $this->text_domain )?><span class="screen-reader-text"><?php echo esc_attr__( '(opens in a new window)', $this->text_domain ); ?></span><span aria-hidden="true" class="dashicons dashicons-external"></span></strong></a>
-							<?php
-								esc_attr__( 'by', $this->text_domain ) . ' ' . ucwords(  esc_attr( $value['createdBy'] ) );
+						$votesCount = $value['votesCount'];
+						$link = $value['link'];
+						$title = $value['title'];
+						$author = $value['createdBy'];
+						$status = $value['status'];
+						$createdTime = $value['createdAt'];
+						$text_domain = $this->text_domain;
 
-								if ( $value['status'] == "open" ){
-									echo esc_attr__( ' - ', $this->text_domain ) . ' ' . human_time_diff( strtotime( $value['createdAt'] ), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $this->text_domain );
-								}
-								elseif ( $value['status'] == "planned" ){
-									echo "planned";
-									echo ' - ' . '<span class="planned">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
-								}
-								else{
-									echo ' - ' . '<span class="started">' . esc_attr__( ucfirst( $value['status'] ), $this->text_domain ) . '</span>';
-								}
-								?>
-						</td>
-					</tr>
-					<?php
+						ClassicPressPetitionsDashboard::table_body( $votesCount, $link, $title, $author, $status, $createdTime, $text_domain );
+
 					}
 				}
 				echo '</table></div>';	
@@ -228,6 +193,34 @@ if ( ! class_exists( 'ClassicPressPetitionsDashboard' ) ) {
 				return;
 			}
 			remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+		}
+
+		/**
+		 * Table body Loop output
+		 */
+		private static function table_body( $votesCount, $link, $title, $author, $status, $createdTime, $text_domain ) {
+		?>
+			<tr>
+				<td class="votes-count"><?php echo esc_attr( $votesCount ); ?></td>
+
+				<td class="petition">
+					<a target="_blank" href="<?php echo esc_url( $link ) ?>"><strong><?php echo esc_attr__( $title, $text_domain )?><span class="screen-reader-text"><?php echo esc_attr__( '(opens in a new window)', $text_domain ); ?></span><span aria-hidden="true" class="dashicons dashicons-external"></span></strong></a>
+					<?php
+						esc_attr__( 'by', $text_domain ) . ' ' . ucwords(  esc_attr( $author ) );
+
+						if ( $status == "open" ){
+							echo esc_attr__( ' - ', $text_domain ) . ' ' . human_time_diff( strtotime( $createdTime ), current_time('timestamp') ) . ' ' . esc_attr__( 'ago', $text_domain );
+						} 
+						elseif ( $status == "planned" ){
+							echo ' - ' . '<span class="planned">' . esc_attr__( ucfirst( $status ), $text_domain ) . '</span>';
+						} 
+						else{
+							echo ' - ' . '<span class="started">' . esc_attr__( ucfirst( $status ), $text_domain ) . '</span>';
+						}
+						?>
+				</td>
+			</tr>
+		<?php
 		}
 
 	}
