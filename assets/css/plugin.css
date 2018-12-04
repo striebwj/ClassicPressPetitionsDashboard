@@ -10,6 +10,45 @@
   padding: 10px 12px 6px;
 }
 
+/* Link to the petitions website  */
+.cp_petitions_link {
+  margin: 1rem 0;
+}
+
+/* Style the tab */
+#cp_petitions_dashboard_widget .tab {
+  overflow: hidden;
+  background-color: transparent;
+}
+
+/* Style the buttons inside the tab */
+#cp_petitions_dashboard_widget .tab button {
+  background-color: #fff;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+#cp_petitions_dashboard_widget .tab button:hover {
+  background-color: #e8e8e8;
+}
+
+/* Create an active/current tablink class */
+#cp_petitions_dashboard_widget .tab button.active {
+  background-color: #f5f5f5;
+}
+
+/* Style the tab content */
+#cp_petitions_dashboard_widget .tabcontent {
+  display: none;
+  padding: 6px 0px;
+  background-color: #f5f5f5;
+}
+
 /* Petitions list */
 table.cp_petitions {
   width: 100%;
@@ -17,7 +56,7 @@ table.cp_petitions {
   border-spacing: 0;
 }
 
-tbody tr:nth-child(odd) {
+table.cp_petitions tbody tr:nth-child(odd) {
   background: #fff;
 }
 
@@ -29,65 +68,26 @@ tbody tr:nth-child(odd) {
   font-weight: normal;
 }
 
-/* Link to the petitions website  */
-.cp_petitions_link {
-  margin: 1rem 0;
-}
-
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  background-color: transparent;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: #fff;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #e8e8e8;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #f5f5f5;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 0px;
-  background-color: #f5f5f5;
-}
-
-thead {
+table.cp_petitions thead {
   font-weight: 700;
 }
 
-td {
+table.cp_petitions td {
   padding: 8px;
 }
 
-td:nth-child(1) {
+table.cp_petitions td:nth-child(1) {
   text-align: center;
 }
 
-span.planned {
+table.cp_petitions span.planned {
   display: inline;
   background: #89288f; /* 61ce70 is the classic green but a pain to read */
   color: #fff;
   padding: 2px 4px;
 }
 
-span.started {
+table.cp_petitions span.started {
   display: inline;
   background: #1da21d;
   color: #fff;
